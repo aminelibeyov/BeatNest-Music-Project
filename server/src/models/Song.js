@@ -59,8 +59,32 @@ const songSchema = new mongoose.Schema({
   }],
   status: {
     type: String,
-    enum: ['draft', 'published', 'archived'],
-    default: 'draft'
+    enum: ['draft', 'pending', 'approved', 'rejected', 'archived'],
+    default: 'pending'
+  },
+  approvalStatus: {
+    status: {
+      type: String,
+      enum: ['pending', 'approved', 'rejected'],
+      default: 'pending'
+    },
+    approvedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      default: null
+    },
+    rejectionReason: {
+      type: String,
+      default: null
+    },
+    approvedAt: {
+      type: Date,
+      default: null
+    }
+  },
+  isPublished: {
+    type: Boolean,
+    default: false
   },
   createdAt: {
     type: Date,
