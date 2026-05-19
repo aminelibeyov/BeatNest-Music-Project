@@ -1,43 +1,53 @@
 {
-  "name": "beatnest-backend",
+  "name": "beatnest-server",
   "version": "1.0.0",
-  "description": "BeatNest Music Platform - Backend",
+  "description": "BeatNest Music Streaming Backend API",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cross-env NODE_ENV=production npm run start",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "jest --runInBand"
   },
   "keywords": [
+    "beatnest",
     "music",
-    "platform",
-    "streaming"
+    "streaming",
+    "spotify-clone"
   ],
-  "author": "",
+  "author": "BeatNest Team",
   "license": "ISC",
-  "type": "commonjs",
+  "engines": {
+    "node": ">=16.x",
+    "npm": ">=8.x"
+  },
   "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "jsonwebtoken": "^9.0.0",
     "bcryptjs": "^2.4.3",
-    "cloudinary": "^1.32.0",
-    "cookie-parser": "^1.4.7",
+    "cookie-parser": "^1.4.6",
+    "helmet": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-async-errors": "^3.1.1",
-    "express-rate-limit": "^6.7.0",
-    "helmet": "^7.0.0",
-    "joi": "^17.9.1",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.0",
-    "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.1",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0",
-    "winston": "^3.19.0"
+    "cloudinary": "^1.35.0",
+    "express-validator": "^7.0.0",
+    "joi": "^17.9.2",
+    "express-async-handler": "^1.2.0",
+    "morgan": "^1.10.0",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "axios": "^1.4.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "eslint": "^8.40.0",
+    "prettier": "^2.8.8",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "@types/jest": "^29.5.2"
   }
 }

@@ -22,6 +22,7 @@ import AdminApproval from './pages/AdminApproval'
 
 // Import components
 import Navigation from './components/Common/Navigation'
+import Footer from './components/Common/Footer'
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -77,6 +78,7 @@ function App() {
           <Route path="/admin/panel" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
           <Route path="/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </Router>
   )

@@ -1,199 +1,220 @@
-# BeatNest - Music Platform
+<<<<<<< HEAD
+# BeatNest-Music-Project
+BeatNest Music Project
+=======
+# BeatNest - Spotify Clone Music Streaming Platform
 
-BeatNest is a comprehensive music streaming and sharing platform built with Node.js/Express for the backend and React for the frontend.
+**BeatNest** is a production-grade, full-stack music streaming application built with modern web technologies. It provides a complete music streaming experience with user authentication, artist management, admin controls, and premium subscription features.
 
-## Features
+## 🎵 Project Overview
 
-### Backend Features
-- ✅ User Authentication (Login, Register, Email Verification)
-- ✅ Password Management (Hash, Reset, Forgot Password)
-- ✅ Role-Based Authorization (User, Artist, Admin)
-- ✅ Song Management (Create, Read, Update, Delete)
-- ✅ Pagination, Filtering, and Sorting
-- ✅ Search Functionality
-- ✅ Global Error Handling
-- ✅ Logger Middleware
-- ✅ File Upload (Multer, Cloudinary)
-- ✅ Email Service (Nodemailer)
+BeatNest is designed to replicate Spotify's core functionality with the following architecture:
 
-### Frontend Features
-- ✅ Responsive Design (Mobile, Tablet, Desktop)
-- ✅ Modern UI/UX with Tailwind CSS
-- ✅ JWT Authentication
-- ✅ Protected Routes
-- ✅ Minimum 6 Pages
-  - Home
-  - Login
-  - Register
-  - Dashboard
-  - Song Detail
-  - Contact
-  - Admin Panel
-- ✅ Admin Panel
-- ✅ CRUD Operations
-- ✅ Dynamic API Integration
-- ✅ Real-time Loading States
+- **Frontend**: React + Vite with Tailwind CSS, Redux Toolkit, and RTK Query
+- **Backend**: Node.js + Express with MongoDB
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT with refresh tokens
+- **File Storage**: Cloudinary integration
+- **Role System**: Listener, Artist, Admin
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 BeatNest-Music-Project/
-├── server/
+├── client/                 # React + Vite frontend application
 │   ├── src/
-│   │   ├── config/         # Database, Passport, Cloudinary
-│   │   ├── constants/      # Roles, Status
-│   │   ├── controllers/    # Business logic
-│   │   ├── middlewares/    # Auth, Error, Logger, Role, Upload
-│   │   ├── models/         # User, Song, Category, Order
-│   │   ├── routes/         # API routes
-│   │   ├── services/       # Auth, Email, Music
-│   │   ├── utils/          # JWT, ApiError
-│   │   ├── validations/    # Input validation
-│   │   ├── queue/          # Email queue
-│   │   ├── templates/      # Email templates
-│   │   ├── app.js
-│   │   └── server.js
+│   │   ├── app/           # Redux store setup
+│   │   ├── pages/         # Page components
+│   │   ├── features/      # Feature-based modules
+│   │   ├── components/    # Reusable UI components
+│   │   ├── layouts/       # Layout components
+│   │   ├── routes/        # Route configuration
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── services/      # API services (RTK Query)
+│   │   ├── store/         # Redux store
+│   │   ├── utils/         # Utility functions
+│   │   ├── types/         # TypeScript types
+│   │   ├── assets/        # Images, fonts, etc.
+│   │   └── App.jsx
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── tailwind.config.js
+│   ├── .env.example
 │   └── package.json
 │
-└── client/
-    ├── src/
-    │   ├── components/     # Common, Auth, Admin
-    │   ├── pages/          # Home, Login, Register, Dashboard, etc.
-    │   ├── services/       # API calls
-    │   ├── hooks/          # useAuth, useFetch
-    │   ├── context/        # AuthContext
-    │   ├── utils/          # Validators, helpers
-    │   ├── styles/         # Global CSS
-    │   ├── assets/         # Images, icons
-    │   ├── main.jsx
-    │   └── App.jsx
-    ├── index.html
-    ├── vite.config.js
-    ├── tailwind.config.js
-    └── package.json
+├── server/                 # Express.js backend application
+│   ├── src/
+│   │   ├── config/        # Configuration files
+│   │   ├── modules/       # Feature modules (MVC)
+│   │   ├── middlewares/   # Express middlewares
+│   │   ├── routes/        # Route handlers
+│   │   ├── utils/         # Utility functions
+│   │   ├── services/      # Business logic
+│   │   ├── validations/   # Request validations
+│   │   ├── sockets/       # WebSocket handlers
+│   │   ├── jobs/          # Background jobs
+│   │   ├── app.js         # Express app setup
+│   │   └── server.js      # Server entry point
+│   ├── .env.example
+│   ├── package.json
+│   └── .eslintrc.json
+│
+├── ARCHITECTURE.md         # Detailed architecture documentation
+├── DATABASE_SCHEMA.md      # Database schema documentation
+├── API_ROUTES.md           # API routes documentation
+├── .gitignore
+└── README.md              # This file
 ```
 
-## Installation
+## 🚀 Key Features
 
-### Backend Setup
+### Authentication & Security
+- User registration and login
+- JWT authentication with refresh tokens
+- Password reset functionality
+- Role-based access control (RBAC)
+- Secure password hashing with bcrypt
+
+### User Features
+- Home page with recommendations
+- Advanced search functionality
+- Music player with queue management
+- Favorites/Wishlist system
+- Playlist creation and management
+- Listening history tracking
+- User profile management
+- Follow artists
+- Premium subscription
+
+### Artist Features
+- Upload songs and cover images
+- Create albums
+- Song management
+- Profile management
+- Song approval workflow (pending → approved)
+
+### Admin Features
+- Comprehensive admin dashboard
+- Song approval/rejection
+- User management (ban/unban)
+- Analytics and statistics
+- Category management
+- Premium user management
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** - UI library
+- **Vite** - Build tool
+- **Tailwind CSS v4** - Styling
+- **Redux Toolkit** - State management
+- **RTK Query** - Data fetching
+- **React Router DOM** - Routing
+- **Axios** - HTTP client
+- **Framer Motion** - Animations
+- **React Hook Form** - Form management
+- **Zod** - Validation
+
+### Backend
+- **Node.js** - Runtime
+- **Express.js** - Web framework
+- **MongoDB** - Database
+- **Mongoose** - ODM
+- **JWT** - Authentication
+- **Bcrypt** - Password hashing
+- **Multer** - File upload
+- **Cloudinary** - Cloud storage
+- **Helmet** - Security middleware
+- **Express Validator** - Validation
+
+## 📝 Getting Started
+
+### Prerequisites
+- Node.js (v16+)
+- npm or yarn
+- MongoDB
+- Git
+
+### Installation
+
+#### Clone Repository
+```bash
+git clone https://github.com/aminelibeyov/BeatNest-Music-Project.git
+cd BeatNest-Music-Project
+```
+
+#### Setup Backend
 ```bash
 cd server
 npm install
 cp .env.example .env
-# Update .env with your configuration
+# Configure .env with your settings
 npm run dev
 ```
 
-### Frontend Setup
+#### Setup Frontend
 ```bash
 cd client
 npm install
+cp .env.example .env
+# Configure .env with API URL
 npm run dev
 ```
 
-## Environment Variables
+## 🏗️ Architecture Highlights
 
-### Server (.env)
-```
-MONGODB_URI=mongodb://localhost:27017/beatnest
-JWT_SECRET=your_jwt_secret_key
-EMAIL_SERVICE=gmail
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_password
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-CLIENT_URL=http://localhost:3000
-PORT=5000
-NODE_ENV=development
-```
+### Clean Architecture Principles
+- Separation of concerns (MVC pattern on backend)
+- Feature-based organization (frontend)
+- Reusable components and services
+- Scalable folder structure
 
-## API Endpoints
+### Backend MVC Structure
+Each module contains:
+- **Controller** - Request handlers
+- **Service** - Business logic
+- **Model** - Database schema
+- **Route** - Endpoints
+- **Validation** - Request validation
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/forgot-password` - Request password reset
-- `POST /api/auth/reset-password/:token` - Reset password
-- `POST /api/auth/verify-email/:token` - Verify email
+### Frontend Feature Architecture
+- **Feature modules** with isolated logic
+- **Reusable components** for UI
+- **Custom hooks** for logic
+- **RTK Query** for API state management
+- **Protected routes** for RBAC
 
-### Songs
-- `GET /api/songs` - Get all songs with pagination/filtering
-- `GET /api/songs/:id` - Get song detail
-- `POST /api/songs` - Create song (Artist/Admin only)
-- `PUT /api/songs/:id` - Update song
-- `DELETE /api/songs/:id` - Delete song
-- `POST /api/songs/:id/like` - Like/Unlike song
-- `POST /api/songs/:id/play` - Increment play count
+## 📚 Documentation
 
-### Users
-- `GET /api/users/profile` - Get user profile
-- `PUT /api/users/profile` - Update profile
-- `DELETE /api/users/account` - Delete account
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - Complete architecture details
+- [DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md) - Database schemas
+- [API_ROUTES.md](./API_ROUTES.md) - API endpoints reference
 
-### Admin
-- `GET /api/admin/stats` - Dashboard statistics
-- `GET /api/admin/users` - Get all users
-- `PUT /api/admin/users/:userId/role` - Update user role
-- `DELETE /api/admin/users/:userId` - Delete user
-- `POST /api/admin/songs/:songId/approve` - Approve song
-- `DELETE /api/admin/songs/:songId/reject` - Reject song
+## 🔐 Security Features
 
-## Technology Stack
+- JWT token-based authentication
+- Refresh token rotation
+- Rate limiting
+- CORS configuration
+- Helmet security headers
+- Input validation and sanitization
+- SQL injection protection (MongoDB)
+- XSS protection
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT
-- Bcryptjs
-- Nodemailer
-- Multer
-- Cloudinary
-- Passport.js
+## 📱 Responsive Design
 
-### Frontend
-- React 18
-- React Router DOM
-- Axios
-- Tailwind CSS
-- React Toastify
-- Zustand (State Management)
-- Vite
+- Mobile-first approach
+- Tablet optimization
+- Desktop experience
+- Dark theme (Spotify-style)
+- Smooth animations
 
-## Available Scripts
+## 📄 License
 
-### Server
-```bash
-npm run dev      # Start development server
-npm start        # Start production server
-npm test         # Run tests
-```
-
-### Client
-```bash
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run preview  # Preview production build
-npm run lint     # Run ESLint
-```
-
-## Contributing
-
-1. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-2. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-3. Push to the branch (`git push origin feature/AmazingFeature`)
-4. Open a Pull Request
-
-## License
-
-ISC
-
-## Author
-
-Your Name
+This project is part of a final project submission. All rights reserved.
 
 ---
 
-**Happy Coding! 🎵**
+**Last Updated**: May 2026  
+**Status**: Architecture Planning Complete
+>>>>>>> 90cca7e (chore: initial architecture and project setup)
