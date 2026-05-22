@@ -23,6 +23,7 @@ import AdminApproval from './pages/AdminApproval'
 // Import components
 import Navigation from './components/Common/Navigation'
 import Footer from './components/Common/Footer'
+import Footer from './components/Common/Footer'
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {

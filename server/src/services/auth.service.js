@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { generateToken } = require('../utils/jwt');
 const ApiError = require('../utils/ApiError');
+const crypto = require('crypto');
 
 const register = async (userData) => {
   const { email, password, firstName, lastName, role } = userData;
@@ -17,17 +18,24 @@ const register = async (userData) => {
     lastName,
     email,
     password,
-    role: role || 'user'
+    role: role || 'user',
+    isEmailVerified: false
   });
+
+  // Generate email verification token
+  const emailVerificationToken = crypto.randomBytes(32).toString('hex');
+  user.emailVerificationToken = emailVerificationToken;
+  user.emailVerificationExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
   await user.save();
 
-  // Generate token
+  // Generate authentication token
   const token = generateToken({ id: user._id, email: user.email, role: user.role });
 
   return {
     user: user.toJSON(),
-    token
+    token,
+    emailVerificationToken
   };
 };
 

@@ -13,17 +13,20 @@ const register = async (req, res, next) => {
 
     const result = await authService.register(value);
 
-    // Send verification email
+    // Send verification email with actual token
     await emailService.sendVerificationEmail(
       result.user.email,
-      'verification-token', // Should be actual token
+      result.emailVerificationToken,
       result.user.firstName
     );
 
     res.status(201).json({
       success: true,
       message: 'User registered successfully. Please check your email for verification.',
-      data: result
+      data: {
+        user: result.user,
+        token: result.token
+      }
     });
   } catch (error) {
     next(error);

@@ -4,12 +4,21 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 require('express-async-errors');
 const passport = require('passport');
+const dns = require('dns');
+
 require('./config/passport');
+
 const { morganMiddleware, logger } = require('./middlewares/logger.middleware');
 const { errorHandler } = require('./middlewares/error.middleware');
 const apiRoutes = require('./routes/index');
 
 const app = express();
+
+// DNS servers
+dns.setServers([
+  '1.1.1.1',
+  '8.8.8.8'
+]);
 
 // Security middleware
 app.use(helmet());
@@ -22,9 +31,10 @@ app.use(cors({
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
+
 app.use(limiter);
 
 // Body parser
