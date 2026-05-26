@@ -35,35 +35,39 @@ const Home = () => {
   const famousArtists = [
     {
       name: 'Eminem',
-      image: '🎤',
+      initials: 'EM',
       genre: 'Hip-Hop/Rap',
       famousSong: 'Lose Yourself',
       bio: 'One of the best-selling music artists of all time and the most successful rapper ever',
-      achievement: 'Multiple Grammy Awards, Billboard #1 Artist'
+      achievement: 'Multiple Grammy Awards, Billboard #1 Artist',
+      color: 'from-orange-500 to-red-600'
     },
     {
       name: 'The Weeknd',
-      image: '🌙',
+      initials: 'TW',
       genre: 'R&B/Synthwave',
       famousSong: 'Blinding Lights',
       bio: 'Canadian singer-songwriter known for his distinctive falsetto and dark production',
-      achievement: 'Spotify\'s Most-Streamed Artist, Grammy Winner'
+      achievement: 'Spotify\'s Most-Streamed Artist, Grammy Winner',
+      color: 'from-purple-500 to-pink-600'
     },
     {
       name: 'Drake',
-      image: '🏆',
+      initials: 'DR',
       genre: 'Hip-Hop/R&B',
       famousSong: 'One Dance',
       bio: 'Canadian rapper, singer, and songwriter with the most certified records in history',
-      achievement: 'Billboard Artist of the Decade, Record-Breaking Streams'
+      achievement: 'Billboard Artist of the Decade, Record-Breaking Streams',
+      color: 'from-blue-500 to-cyan-600'
     },
     {
       name: 'Billie Eilish',
-      image: '👁️',
+      initials: 'BE',
       genre: 'Alternative/Pop',
       famousSong: 'Bad Guy',
       bio: 'Youngest artist to win Grammy Awards in the major categories at 18 years old',
-      achievement: 'Multiple Grammy Awards, Global Phenomenon'
+      achievement: 'Multiple Grammy Awards, Global Phenomenon',
+      color: 'from-green-500 to-emerald-600'
     }
   ]
 
@@ -182,19 +186,47 @@ const Home = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {famousArtists.map((artist, index) => (
-                <div key={index} className="bg-slate-800 rounded-lg overflow-hidden hover:transform hover:scale-105 transition">
-                  <div className="bg-gradient-to-br from-green-500 to-purple-600 p-12 flex items-center justify-center text-6xl">
-                    {artist.image}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-white text-2xl font-bold mb-2">{artist.name}</h3>
-                    <p className="text-green-400 font-semibold mb-2">{artist.genre}</p>
-                    <p className="text-slate-300 text-sm mb-4">{artist.bio}</p>
-                    <div className="border-t border-slate-700 pt-4 mb-4">
-                      <p className="text-slate-400 text-sm mb-2"><strong>Famous Song:</strong></p>
-                      <p className="text-white font-bold">"{artist.famousSong}"</p>
+                <div 
+                  key={index} 
+                  className="bg-slate-800/50 rounded-xl overflow-hidden hover:transform hover:scale-105 transition duration-300 border border-slate-700/50 hover:border-green-500/30"
+                >
+                  {/* Artist Avatar */}
+                  <div className={`bg-gradient-to-br ${artist.color} p-16 flex items-center justify-center relative overflow-hidden h-40`}>
+                    <div className="absolute inset-0 opacity-20 blur-3xl bg-white"></div>
+                    <div className="relative z-10">
+                      <div className="text-6xl font-bold text-white drop-shadow-lg">
+                        {artist.initials}
+                      </div>
                     </div>
-                    <p className="text-yellow-400 text-xs font-semibold">✓ {artist.achievement}</p>
+                  </div>
+
+                  {/* Artist Info */}
+                  <div className="p-6">
+                    <h3 className="text-white text-xl font-bold mb-1 group-hover:text-green-400 transition">
+                      {artist.name}
+                    </h3>
+                    <p className="text-green-400 font-semibold text-sm mb-3">
+                      {artist.genre}
+                    </p>
+                    
+                    <p className="text-slate-300 text-xs mb-4 line-clamp-2">
+                      {artist.bio}
+                    </p>
+
+                    {/* Famous Song */}
+                    <div className="border-t border-slate-700/50 pt-3 mb-3">
+                      <p className="text-slate-400 text-xs font-medium mb-1">💿 Top Hit</p>
+                      <p className="text-white text-sm font-bold truncate">
+                        "{artist.famousSong}"
+                      </p>
+                    </div>
+
+                    {/* Achievement Badge */}
+                    <div className="bg-slate-700/30 rounded-lg p-2 border border-slate-600/30">
+                      <p className="text-yellow-400 text-xs font-semibold text-center">
+                        ⭐ {artist.achievement}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}

@@ -1,5 +1,5 @@
 const ApiError = require('../utils/ApiError');
-const logger = require('./logger.middleware');
+const { logger } = require('./logger.middleware');
 
 const errorHandler = (err, req, res, next) => {
   logger.error(`[${new Date().toISOString()}] ${err.message}`, {

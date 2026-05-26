@@ -1,0 +1,54 @@
+
+========================================
+📧 EMAIL (Development Mode - Not Sent)
+========================================
+TO: murad@gmail.com
+SUBJECT: 🎵 Verify Your BeatNest Account
+FROM: noreply@beatnest.com
+TIME: 2026-05-26T10:25:28.565Z
+----------------------------------------
+
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #22c55e;">🎵 BeatNest Email Verification</h2>
+      <p>Hello <strong>Murad</strong>,</p>
+      <p>Thank you for signing up at BeatNest! Please verify your email address by clicking the button below:</p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="http://localhost:5173/verify-email?token=9a94e1346193223b142007236c8587e63bc895b548dc3fcf4241881764d4c672" style="background-color: #22c55e; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+          ✓ Verify Email
+        </a>
+      </div>
+      <p style="color: #666; font-size: 12px;">Or copy this link: <br>http://localhost:5173/verify-email?token=9a94e1346193223b142007236c8587e63bc895b548dc3fcf4241881764d4c672</p>
+      <p style="color: #ff6b6b; font-weight: bold;">⏰ This link will expire in 24 hours.</p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+      <p style="color: #999; font-size: 12px;">© 2026 BeatNest Music Platform. All rights reserved.</p>
+    </div>
+  
+========================================
+
+
+========================================
+📧 EMAIL (Development Mode - Not Sent)
+========================================
+TO: kanan.amirov@gmail.com
+SUBJECT: 🎵 Verify Your BeatNest Account
+FROM: noreply@beatnest.com
+TIME: 2026-05-26T10:25:36.424Z
+----------------------------------------
+
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #22c55e;">🎵 BeatNest Email Verification</h2>
+      <p>Hello <strong>Kanan</strong>,</p>
+      <p>Thank you for signing up at BeatNest! Please verify your email address by clicking the button below:</p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="http://localhost:5173/verify-email?token=f11233f02ec050688e68ea3d3af7c71e68629ff52851e9420c0dabadbac21658" style="background-color: #22c55e; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+          ✓ Verify Email
+        </a>
+      </div>
+      <p style="color: #666; font-size: 12px;">Or copy this link: <br>http://localhost:5173/verify-email?token=f11233f02ec050688e68ea3d3af7c71e68629ff52851e9420c0dabadbac21658</p>
+      <p style="color: #ff6b6b; font-weight: bold;">⏰ This link will expire in 24 hours.</p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
+      <p style="color: #999; font-size: 12px;">© 2026 BeatNest Music Platform. All rights reserved.</p>
+    </div>
+  
+========================================
+
