@@ -19,6 +19,8 @@ import Premium from './pages/Premium'
 import Wishlist from './pages/Wishlist'
 import Library from './pages/Library'
 import AdminApproval from './pages/AdminApproval'
+import SongUpload from './pages/SongUpload'
+import ArtistSongs from './pages/ArtistSongs'
 
 // Import components
 import Navigation from './components/Common/Navigation'
@@ -77,6 +79,10 @@ function App() {
           {/* Admin Routes */}
           <Route path="/admin/panel" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
           <Route path="/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
+
+          {/* Artist Routes */}
+          <Route path="/artist/upload" element={<ProtectedRoute requiredRole="artist"><SongUpload /></ProtectedRoute>} />
+          <Route path="/artist/songs" element={<ProtectedRoute requiredRole="artist"><ArtistSongs /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </AuthProvider>
