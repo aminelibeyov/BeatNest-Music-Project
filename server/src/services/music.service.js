@@ -62,14 +62,14 @@ const getSongById = async (songId) => {
   return song;
 };
 
-const updateSong = async (songId, updateData, userId) => {
+const updateSong = async (songId, updateData, userId, userRole) => {
   const song = await Song.findById(songId);
 
   if (!song) {
     throw ApiError.notFound('Song not found');
   }
 
-  if (song.artistId.toString() !== userId && req.user.role !== 'admin') {
+  if (song.artistId.toString() !== userId && userRole !== 'admin') {
     throw ApiError.forbidden('You can only update your own songs');
   }
 
@@ -79,14 +79,14 @@ const updateSong = async (songId, updateData, userId) => {
   return song.populate('category', 'name');
 };
 
-const deleteSong = async (songId, userId) => {
+const deleteSong = async (songId, userId, userRole) => {
   const song = await Song.findById(songId);
 
   if (!song) {
     throw ApiError.notFound('Song not found');
   }
 
-  if (song.artistId.toString() !== userId && req.user.role !== 'admin') {
+  if (song.artistId.toString() !== userId && userRole !== 'admin') {
     throw ApiError.forbidden('You can only delete your own songs');
   }
 

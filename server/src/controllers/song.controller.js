@@ -66,7 +66,7 @@ const updateSong = async (req, res, next) => {
       return next(ApiError.badRequest(error.details[0].message));
     }
 
-    const song = await musicService.updateSong(req.params.id, value, req.user.id);
+    const song = await musicService.updateSong(req.params.id, value, req.user.id, req.user.role);
 
     res.status(200).json({
       success: true,
@@ -80,7 +80,7 @@ const updateSong = async (req, res, next) => {
 
 const deleteSong = async (req, res, next) => {
   try {
-    const result = await musicService.deleteSong(req.params.id, req.user.id);
+    const result = await musicService.deleteSong(req.params.id, req.user.id, req.user.role);
 
     res.status(200).json({
       success: true,

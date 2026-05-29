@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import api from '../services/api'
+import { useAuth } from '../hooks/useAuth'
 import { toast } from 'react-toastify'
 
 const Register = () => {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -92,7 +94,7 @@ const Register = () => {
     setLoading(true)
 
     try {
-      await api.post('/auth/register', {
+      const response = await api.post('/auth/register', {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
@@ -101,8 +103,15 @@ const Register = () => {
         role: formData.role
       })
 
-      toast.success('Registration successful! Please check your email to verify your account. 📧')
-      navigate('/login')
+      // Auto-login after successful registration
+      if (response.data.data.user && response.data.data.token) {
+        login(response.data.data.user, response.data.data.token)
+        toast.success('Registration successful! Welcome to BeatNest! 🎵')
+        navigate('/dashboard')
+      } else {
+        toast.success('Registration successful! Please log in to continue.')
+        navigate('/login')
+      }
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Registration failed. Please try again.'
       toast.error(errorMessage)
