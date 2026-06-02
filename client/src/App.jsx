@@ -25,6 +25,7 @@ import ArtistSongs from './pages/ArtistSongs'
 // Import components
 import Navigation from './components/Common/Navigation'
 import Footer from './components/Common/Footer'
+import PageLoader from './components/Common/PageLoader'
 
 // Protected Route component
 const ProtectedRoute = ({ children, requiredRole }) => {
@@ -49,6 +50,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+        <PageLoader />
         <ToastContainer
           position="top-right"
           autoClose={5000}
