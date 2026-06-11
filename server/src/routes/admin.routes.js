@@ -9,9 +9,10 @@ router.use(authenticateToken, authorize('admin'));
 
 router.get('/stats', adminController.getDashboardStats);
 router.get('/users', adminController.getUsers);
+router.get('/artists', adminController.getArtists);
+router.get('/artists/:artistId', adminController.getArtistById);
 router.put('/users/:userId/role', adminController.updateUserRole);
+router.put('/users/:userId/status', adminController.updateUserStatus);
 router.delete('/users/:userId', adminController.deleteUser);
-router.post('/songs/:songId/approve', adminController.approveSong);
-router.delete('/songs/:songId/reject', adminController.rejectSong);
 
 module.exports = router;

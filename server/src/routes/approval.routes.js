@@ -8,6 +8,8 @@ const router = express.Router();
 router.use(authenticateToken, authorize('admin'));
 
 router.get('/pending', approvalController.getPendingSongs);
+router.get('/songs', approvalController.getSongsByStatus);
+router.get('/songs/:songId', approvalController.getSongById);
 router.post('/approve/:songId', approvalController.approveSong);
 router.post('/reject/:songId', approvalController.rejectSong);
 router.get('/stats', approvalController.getApprovalStats);

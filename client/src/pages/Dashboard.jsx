@@ -244,7 +244,7 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
-              onClick={() => navigate('/admin/panel')}
+              onClick={() => navigate('/admin')}
               className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-8 cursor-pointer hover:from-blue-500 hover:to-blue-700 transition"
             >
               <div className="text-4xl mb-4">📊</div>

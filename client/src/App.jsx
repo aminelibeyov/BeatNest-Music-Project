@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -20,8 +20,11 @@ import Premium from './pages/Premium'
 import Wishlist from './pages/Wishlist'
 import Library from './pages/Library'
 import AdminApproval from './pages/AdminApproval'
+import AdminArtists from './pages/AdminArtists'
+import AdminArtistDetail from './pages/AdminArtistDetail'
 import SongUpload from './pages/SongUpload'
 import ArtistSongs from './pages/ArtistSongs'
+import AdminLayout from './layouts/AdminLayout'
 
 // Import components
 import Navigation from './components/Common/Navigation'
@@ -47,24 +50,14 @@ const ProtectedRoute = ({ children, requiredRole }) => {
   return children
 }
 
-function App() {
+function AppRoutes() {
+  const location = useLocation()
+  const isAdminRoute = location.pathname.startsWith('/admin')
+
   return (
-    <Router>
-      <AuthProvider>
-        <PageLoader />
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <Navigation />
-        <Routes>
+    <>
+      {!isAdminRoute && <Navigation />}
+      <Routes>
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -81,14 +74,40 @@ function App() {
           <Route path="/premium" element={<ProtectedRoute><Premium /></ProtectedRoute>} />
 
           {/* Admin Routes */}
-          <Route path="/admin/panel" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
-          <Route path="/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<AdminPanel />} />
+            <Route path="approval" element={<AdminApproval />} />
+            <Route path="artists" element={<AdminArtists />} />
+            <Route path="artists/:artistId" element={<AdminArtistDetail />} />
+          </Route>
+          <Route path="/admin/panel" element={<Navigate to="/admin" replace />} />
 
           {/* Artist Routes */}
           <Route path="/artist/upload" element={<ProtectedRoute requiredRole="artist"><SongUpload /></ProtectedRoute>} />
           <Route path="/artist/songs" element={<ProtectedRoute requiredRole="artist"><ArtistSongs /></ProtectedRoute>} />
-        </Routes>
-        <Footer />
+      </Routes>
+      {!isAdminRoute && <Footer />}
+    </>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <AuthProvider>
+        <PageLoader />
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <AppRoutes />
       </AuthProvider>
     </Router>
   )

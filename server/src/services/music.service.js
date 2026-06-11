@@ -16,7 +16,7 @@ const getSongs = async (query) => {
   const { page = 1, limit = 10, search, sort = '-createdAt', category, genre } = query;
 
   const skip = (page - 1) * limit;
-  const filter = { status: 'published' };
+  const filter = { isPublished: true };
 
   if (search) {
     filter.$text = { $search: search };
