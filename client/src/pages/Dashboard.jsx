@@ -244,7 +244,7 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
-              onClick={() => navigate('/admin')}
+              onClick={() => navigate('/panel/admin')}
               className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-8 cursor-pointer hover:from-blue-500 hover:to-blue-700 transition"
             >
               <div className="text-4xl mb-4">📊</div>
@@ -253,7 +253,7 @@ const Dashboard = () => {
             </div>
 
             <div
-              onClick={() => navigate('/admin/approval')}
+              onClick={() => navigate('/panel/admin/approval')}
               className="bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg p-8 cursor-pointer hover:from-purple-500 hover:to-purple-700 transition"
             >
               <div className="text-4xl mb-4">✓</div>

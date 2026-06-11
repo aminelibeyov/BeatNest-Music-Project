@@ -1,12 +1,11 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-// Import context
 import { AuthProvider } from './context/AuthContext'
+import { useAuth } from './hooks/useAuth'
 
-// Import pages
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -24,71 +23,36 @@ import AdminArtists from './pages/AdminArtists'
 import AdminArtistDetail from './pages/AdminArtistDetail'
 import SongUpload from './pages/SongUpload'
 import ArtistSongs from './pages/ArtistSongs'
-import AdminLayout from './layouts/AdminLayout'
 
-// Import components
 import Navigation from './components/Common/Navigation'
 import Footer from './components/Common/Footer'
 import PageLoader from './components/Common/PageLoader'
 
-// Protected Route component
-const ProtectedRoute = ({ children, requiredRole }) => {
-  const token = localStorage.getItem('token')
-  const user = localStorage.getItem('user')
+const AdminArtistRedirect = () => {
+  const { artistId } = useParams()
+  return <Navigate to={`/panel/admin/artists/${artistId}`} replace />
+}
 
-  if (!token || !user) {
-    return <Navigate to="/login" />
+const ProtectedRoute = ({ children, requiredRole }) => {
+  const { user, token, loading } = useAuth()
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-green-500" />
+      </div>
+    )
   }
 
-  if (requiredRole) {
-    const parsedUser = JSON.parse(user)
-    if (parsedUser.role !== requiredRole) {
-      return <Navigate to="/" />
-    }
+  if (!token || !user) {
+    return <Navigate to="/login" replace />
+  }
+
+  if (requiredRole && user.role !== requiredRole) {
+    return <Navigate to="/" replace />
   }
 
   return children
-}
-
-function AppRoutes() {
-  const location = useLocation()
-  const isAdminRoute = location.pathname.startsWith('/admin')
-
-  return (
-    <>
-      {!isAdminRoute && <Navigation />}
-      <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/contact" element={<Contact />} />
-
-          {/* Protected Routes */}
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/song/:id" element={<ProtectedRoute><SongDetail /></ProtectedRoute>} />
-          <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>} />
-          <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
-          <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
-          <Route path="/premium" element={<ProtectedRoute><Premium /></ProtectedRoute>} />
-
-          {/* Admin Routes */}
-          <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminLayout /></ProtectedRoute>}>
-            <Route index element={<AdminPanel />} />
-            <Route path="approval" element={<AdminApproval />} />
-            <Route path="artists" element={<AdminArtists />} />
-            <Route path="artists/:artistId" element={<AdminArtistDetail />} />
-          </Route>
-          <Route path="/admin/panel" element={<Navigate to="/admin" replace />} />
-
-          {/* Artist Routes */}
-          <Route path="/artist/upload" element={<ProtectedRoute requiredRole="artist"><SongUpload /></ProtectedRoute>} />
-          <Route path="/artist/songs" element={<ProtectedRoute requiredRole="artist"><ArtistSongs /></ProtectedRoute>} />
-      </Routes>
-      {!isAdminRoute && <Footer />}
-    </>
-  )
 }
 
 function App() {
@@ -107,7 +71,35 @@ function App() {
           draggable
           pauseOnHover
         />
-        <AppRoutes />
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/contact" element={<Contact />} />
+
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/song/:id" element={<ProtectedRoute><SongDetail /></ProtectedRoute>} />
+          <Route path="/search" element={<ProtectedRoute><Search /></ProtectedRoute>} />
+          <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+          <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
+          <Route path="/premium" element={<ProtectedRoute><Premium /></ProtectedRoute>} />
+
+          <Route path="/panel/admin" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
+          <Route path="/panel/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
+          <Route path="/panel/admin/artists" element={<ProtectedRoute requiredRole="admin"><AdminArtists /></ProtectedRoute>} />
+          <Route path="/panel/admin/artists/:artistId" element={<ProtectedRoute requiredRole="admin"><AdminArtistDetail /></ProtectedRoute>} />
+          <Route path="/admin" element={<Navigate to="/panel/admin" replace />} />
+          <Route path="/admin/panel" element={<Navigate to="/panel/admin" replace />} />
+          <Route path="/admin/approval" element={<Navigate to="/panel/admin/approval" replace />} />
+          <Route path="/admin/artists" element={<Navigate to="/panel/admin/artists" replace />} />
+          <Route path="/admin/artists/:artistId" element={<AdminArtistRedirect />} />
+
+          <Route path="/artist/upload" element={<ProtectedRoute requiredRole="artist"><SongUpload /></ProtectedRoute>} />
+          <Route path="/artist/songs" element={<ProtectedRoute requiredRole="artist"><ArtistSongs /></ProtectedRoute>} />
+        </Routes>
+        <Footer />
       </AuthProvider>
     </Router>
   )

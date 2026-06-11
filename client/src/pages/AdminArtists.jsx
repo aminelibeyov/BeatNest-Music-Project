@@ -55,13 +55,20 @@ const AdminArtists = () => {
   }
 
   return (
-    <div className="p-6 lg:p-10">
-      <div className="mb-6">
-        <h1 className="text-white text-3xl font-bold">Artist Management</h1>
-        <p className="text-slate-400 text-sm mt-1">View, search, and manage platform artists</p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+      <div className="bg-slate-900/90 border-b border-slate-700/50 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+          <div>
+            <h1 className="text-white text-3xl font-bold">🎤 Artist Management</h1>
+            <p className="text-slate-400 text-sm mt-1">View, search, and manage platform artists</p>
+          </div>
+          <button onClick={() => navigate('/panel/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
+            ← Back to Dashboard
+          </button>
+        </div>
       </div>
 
-      <div>
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Filters */}
         <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50 mb-8">
           <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
@@ -156,7 +163,7 @@ const AdminArtists = () => {
 
                   <div className="flex gap-2">
                     <button
-                      onClick={() => navigate(`/admin/artists/${artist._id}`)}
+                      onClick={() => navigate(`/panel/admin/artists/${artist._id}`)}
                       className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:from-purple-500 hover:to-pink-500 text-sm"
                     >
                       View Profile & Stats

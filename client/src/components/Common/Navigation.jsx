@@ -57,25 +57,25 @@ const Navigation = () => {
                 
                 {user.role === 'admin' && (
                   <div className="relative group">
-                    <Link to="/admin" className="text-slate-300 hover:text-red-400 transition-all duration-300 font-medium relative">
-                      Admin
+                    <Link to="/panel/admin" className="text-slate-300 hover:text-red-400 transition-all duration-300 font-medium relative">
+                      Panel
                       <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-red-400 to-pink-500 group-hover:w-full transition-all duration-300"></span>
                     </Link>
                     <div className="absolute left-0 mt-0 w-56 bg-slate-900/95 backdrop-blur-md rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-slate-700/50 overflow-hidden">
                       <Link 
-                        to="/admin" 
+                        to="/panel/admin" 
                         className="block px-4 py-3 text-slate-300 hover:text-green-400 hover:bg-slate-800/50 transition-all duration-300 border-b border-slate-700/30"
                       >
                         Dashboard
                       </Link>
                       <Link 
-                        to="/admin/approval" 
+                        to="/panel/admin/approval" 
                         className="block px-4 py-3 text-slate-300 hover:text-green-400 hover:bg-slate-800/50 transition-all duration-300 border-b border-slate-700/30"
                       >
                         Song Moderation
                       </Link>
                       <Link 
-                        to="/admin/artists" 
+                        to="/panel/admin/artists" 
                         className="block px-4 py-3 text-slate-300 hover:text-green-400 hover:bg-slate-800/50 transition-all duration-300"
                       >
                         Artist Management
@@ -162,21 +162,21 @@ const Navigation = () => {
                 {user.role === 'admin' && (
                   <>
                     <Link
-                      to="/admin"
+                      to="/panel/admin"
                       className="block px-4 py-3 text-slate-300 hover:text-red-400 hover:bg-slate-800/50 rounded-lg transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      🛠️ Admin Dashboard
+                      🛠️ Panel Dashboard
                     </Link>
                     <Link
-                      to="/admin/approval"
+                      to="/panel/admin/approval"
                       className="block px-4 py-3 text-slate-300 hover:text-red-400 hover:bg-slate-800/50 rounded-lg transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       🎵 Song Moderation
                     </Link>
                     <Link
-                      to="/admin/artists"
+                      to="/panel/admin/artists"
                       className="block px-4 py-3 text-slate-300 hover:text-red-400 hover:bg-slate-800/50 rounded-lg transition-all duration-300"
                       onClick={() => setMobileMenuOpen(false)}
                     >

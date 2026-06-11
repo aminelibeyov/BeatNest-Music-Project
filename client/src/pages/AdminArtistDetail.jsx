@@ -30,7 +30,7 @@ const AdminArtistDetail = () => {
       setPagination((prev) => ({ ...prev, ...response.data.data.pagination }))
     } catch {
       toast.error('Failed to fetch artist details')
-      navigate('/admin/artists')
+      navigate('/panel/admin/artists')
     } finally {
       setLoading(false)
     }
@@ -51,21 +51,21 @@ const AdminArtistDetail = () => {
   const { artist, stats, songs, recentActivity } = data || {}
 
   return (
-    <div className="p-6 lg:p-10">
-      <button
-        onClick={() => navigate('/admin/artists')}
-        className="mb-4 text-slate-400 hover:text-white text-sm transition"
-      >
-        ← Back to Artists
-      </button>
-      <div className="mb-6">
-        <h1 className="text-white text-3xl font-bold">
-          {artist?.firstName} {artist?.lastName}
-        </h1>
-        <p className="text-slate-400 text-sm mt-1">{artist?.email}</p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+      <div className="bg-slate-900/90 border-b border-slate-700/50 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+          <div>
+            <h1 className="text-white text-3xl font-bold">{artist?.firstName} {artist?.lastName}</h1>
+            <p className="text-slate-400 text-sm mt-1">{artist?.email}</p>
+          </div>
+          <div className="flex gap-3">
+            <button onClick={() => navigate('/panel/admin/artists')} className="px-4 py-2 bg-slate-700 text-white rounded-lg text-sm">← Artists</button>
+            <button onClick={() => navigate('/panel/admin')} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">Dashboard</button>
+          </div>
+        </div>
       </div>
 
-      <div>
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Artist Profile */}
         <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50 mb-8">
           <div className="flex flex-col md:flex-row gap-6">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import { toast } from 'react-toastify'
 
@@ -33,6 +34,7 @@ const ShowMoreText = ({ text, limit = 150 }) => {
 }
 
 const AdminApproval = () => {
+  const navigate = useNavigate()
   const [songs, setSongs] = useState([])
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -117,11 +119,20 @@ const AdminApproval = () => {
   }
 
   return (
-    <div className="p-6 lg:p-10">
-      <div className="mb-6">
-        <h1 className="text-white text-3xl font-bold">Song Moderation</h1>
-        <p className="text-slate-400 text-sm mt-1">Review, approve, and track song approval history</p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+      <div className="bg-slate-900/90 border-b border-slate-700/50 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+          <div>
+            <h1 className="text-white text-3xl font-bold">🎵 Song Moderation</h1>
+            <p className="text-slate-400 text-sm mt-1">Review, approve, and track approval history</p>
+          </div>
+          <button onClick={() => navigate('/panel/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
+            ← Back to Dashboard
+          </button>
+        </div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-8">
 
       {stats && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
