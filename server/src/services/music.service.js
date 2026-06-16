@@ -59,6 +59,10 @@ const getSongById = async (songId) => {
     throw ApiError.notFound('Song not found');
   }
 
+  if (!song.isPublished) {
+    throw ApiError.forbidden('Song is not yet approved for public access');
+  }
+
   return song;
 };
 

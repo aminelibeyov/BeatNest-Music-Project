@@ -7,13 +7,14 @@ const STATUS_TABS = [
   { key: 'pending', label: 'Pending', color: 'yellow' },
   { key: 'approved', label: 'Approved', color: 'green' },
   { key: 'rejected', label: 'Rejected', color: 'red' },
-  { key: 'all', label: 'All', color: 'blue' }
+  { key: 'all', label: 'All', color: 'blue' },
+  { key: 'history', label: 'Approval History', color: 'purple' }
 ]
 
 const STATUS_BADGE = {
-  pending: 'text-yellow-400 bg-yellow-600/20',
-  approved: 'text-green-400 bg-green-600/20',
-  rejected: 'text-red-400 bg-red-600/20'
+  pending: 'text-yellow-400 bg-yellow-600/20 border-yellow-600/50',
+  approved: 'text-green-400 bg-green-600/20 border-green-600/50',
+  rejected: 'text-red-400 bg-red-600/20 border-red-600/50'
 }
 
 const ShowMoreText = ({ text, limit = 150 }) => {
@@ -50,7 +51,7 @@ const AdminApproval = () => {
       const params = {
         page: pagination.page,
         limit: pagination.limit,
-        status: activeTab,
+        status: activeTab === 'history' ? 'all' : activeTab,
         ...(search && { search })
       }
       const endpoint = activeTab === 'pending' ? '/approval/pending' : '/approval/songs'
@@ -174,7 +175,7 @@ const AdminApproval = () => {
           </div>
 
           {/* Search */}
-          {activeTab !== 'pending' && (
+          {activeTab !== 'pending' && activeTab !== 'history' && (
             <form onSubmit={handleSearch} className="flex gap-2">
               <input
                 type="text"
@@ -189,6 +190,14 @@ const AdminApproval = () => {
             </form>
           )}
 
+          {activeTab === 'history' && (
+            <div className="bg-purple-600/20 border border-purple-600/50 rounded-lg p-4">
+              <p className="text-purple-300 text-sm">
+                📜 This view shows all songs with their complete approval history including who approved/rejected them and when.
+              </p>
+            </div>
+          )}
+
       {loading ? (
           <div className="flex justify-center py-20">
             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-green-500" />
@@ -196,12 +205,13 @@ const AdminApproval = () => {
         ) : songs.length > 0 ? (
           <>
             <h2 className="text-white text-xl font-bold mb-6">
-              {STATUS_TABS.find((t) => t.key === activeTab)?.label} Songs ({pagination.total})
+              {STATUS_TABS.find((t) => t.key === activeTab)?.label} {activeTab !== 'history' ? `Songs (${pagination.total})` : `(${pagination.total})`}
             </h2>
             <div className="space-y-6">
               {songs.map((song) => {
                 const status = song.approvalStatus?.status || 'pending'
                 const isPending = status === 'pending'
+                const showApprovalActions = activeTab === 'pending' && isPending
 
                 return (
                   <div
@@ -222,7 +232,7 @@ const AdminApproval = () => {
                             <p className="text-slate-400 text-sm">{song.genre} • {song.category?.name}</p>
                           </div>
                           <div className="text-right">
-                            <span className={`inline-block px-3 py-1 rounded text-xs font-bold ${STATUS_BADGE[status] || ''}`}>
+                            <span className={`inline-block px-3 py-1 rounded text-xs font-bold border ${STATUS_BADGE[status] || ''}`}>
                               {status.toUpperCase()}
                             </span>
                             {song.artistId && (
@@ -276,7 +286,7 @@ const AdminApproval = () => {
                       </div>
                     </div>
 
-                    {isPending && (
+                    {showApprovalActions && (
                       <div className="border-t border-slate-700/50 pt-4 mt-4">
                         <textarea
                           placeholder="Rejection reason (required if rejecting)..."

@@ -11,6 +11,7 @@ const AdminPanel = () => {
     totalUsers: 0,
     totalSongs: 0,
     totalArtists: 0,
+    totalCategories: 0,
     pendingApprovals: 0,
     approvedSongs: 0,
     rejectedSongs: 0,
@@ -151,6 +152,13 @@ const AdminPanel = () => {
               <StatCard icon="⏳" title="Pending Approval" value={stats.pendingApprovals} color="from-yellow-600/20 to-orange-900/20" onClick={() => navigate('/panel/admin/approval')} />
             </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+              <StatCard icon="✅" title="Approved Songs" value={stats.approvedSongs} color="from-emerald-600/20 to-emerald-900/20" />
+              <StatCard icon="❌" title="Rejected Songs" value={stats.rejectedSongs} color="from-red-600/20 to-red-900/20" onClick={() => { navigate('/panel/admin/approval'); setTimeout(() => document.querySelector('button')?.click(), 100); }} />
+              <StatCard icon="📊" title="Total Categories" value={stats.totalCategories} color="from-cyan-600/20 to-cyan-900/20" />
+              <StatCard icon="🎧" title="Total Plays" value={stats.totalPlays} color="from-pink-600/20 to-pink-900/20" />
+            </div>
+
             <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700/50 mb-10">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-white text-2xl font-bold">⭐ Add New Song</h2>
@@ -184,21 +192,28 @@ const AdminPanel = () => {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-              <button onClick={() => navigate('/panel/admin/approval')} className="bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 rounded-lg">🎵 Review Pending Songs</button>
-              <button onClick={() => navigate('/panel/admin/artists')} className="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-lg">🎤 Manage Artists</button>
-              <button onClick={() => navigate('/panel/admin/approval')} className="bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-lg">📋 Approval History</button>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+              <button onClick={() => navigate('/panel/admin/approval')} className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white font-bold py-3 rounded-lg transition-all">🎵 Review Pending Songs</button>
+              <button onClick={() => navigate('/panel/admin/artists')} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-3 rounded-lg transition-all">🎤 Manage Artists</button>
+              <button onClick={() => navigate('/panel/admin/approval')} className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-3 rounded-lg transition-all">📋 Approval History</button>
+              <button onClick={() => navigate('/panel/admin/artists')} className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold py-3 rounded-lg transition-all">📊 Artist Statistics</button>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
-                <h3 className="text-white text-lg font-bold mb-4">Recent Activity</h3>
+                <h3 className="text-white text-lg font-bold mb-4">📋 Recent Activity</h3>
                 {stats.recentActivities?.length > 0 ? (
-                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                  <div className="space-y-3 max-h-72 overflow-y-auto">
                     {stats.recentActivities.map((a, i) => (
-                      <div key={i} className="text-slate-300 text-sm border-b border-slate-700/30 pb-2">
-                        {a.type === 'song_upload' ? `🎵 ${a.title} — ${a.status}` : `👤 ${a.title} registered`}
-                        <span className="text-slate-500 text-xs block">{new Date(a.createdAt).toLocaleString()}</span>
+                      <div key={i} className="text-slate-300 text-sm border-b border-slate-700/30 pb-3 last:border-0">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{a.type === 'song_upload' ? '🎵' : '👤'}</span>
+                          <div className="flex-1">
+                            <p className="font-medium">{a.title}</p>
+                            <p className="text-slate-400 text-xs">{a.subtitle || (a.type === 'song_upload' ? a.status : `registered as ${a.status}`)}</p>
+                          </div>
+                        </div>
+                        <span className="text-slate-500 text-xs block mt-1">{new Date(a.createdAt).toLocaleString()}</span>
                       </div>
                     ))}
                   </div>
@@ -207,19 +222,44 @@ const AdminPanel = () => {
                 )}
               </div>
               <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
-                <h3 className="text-white text-lg font-bold mb-4">Moderation Focus</h3>
+                <h3 className="text-white text-lg font-bold mb-4">⚡ Moderation Focus</h3>
                 {stats.pendingApprovals > 0 ? (
                   <>
                     <p className="text-slate-300 mb-4">
-                      <span className="text-yellow-400 font-bold text-2xl">{stats.pendingApprovals}</span> songs waiting for review.
+                      <span className="text-yellow-400 font-bold text-3xl">{stats.pendingApprovals}</span> songs waiting for review.
                     </p>
-                    <button onClick={() => navigate('/panel/admin/approval')} className="w-full bg-yellow-600 text-white font-bold py-3 rounded-lg">
+                    <button onClick={() => navigate('/panel/admin/approval')} className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-yellow-500 hover:to-orange-500 transition-all">
                       Start Reviewing →
                     </button>
                   </>
                 ) : (
-                  <p className="text-slate-300">✨ All songs are reviewed!</p>
+                  <div className="text-center py-8">
+                    <div className="text-4xl mb-2">✨</div>
+                    <p className="text-slate-300">All songs are reviewed!</p>
+                  </div>
                 )}
+              </div>
+            </div>
+
+            <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50 mt-6">
+              <h3 className="text-white text-lg font-bold mb-4">📈 Platform Overview</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center p-4 bg-slate-700/30 rounded-lg">
+                  <p className="text-slate-400 text-xs mb-1">Active Users</p>
+                  <p className="text-white text-2xl font-bold">{stats.activeUsers}</p>
+                </div>
+                <div className="text-center p-4 bg-slate-700/30 rounded-lg">
+                  <p className="text-slate-400 text-xs mb-1">Approval Rate</p>
+                  <p className="text-green-400 text-2xl font-bold">{stats.totalSongs > 0 ? Math.round((stats.approvedSongs / stats.totalSongs) * 100) : 0}%</p>
+                </div>
+                <div className="text-center p-4 bg-slate-700/30 rounded-lg">
+                  <p className="text-slate-400 text-xs mb-1">Avg Plays/Song</p>
+                  <p className="text-white text-2xl font-bold">{stats.approvedSongs > 0 ? Math.round(stats.totalPlays / stats.approvedSongs) : 0}</p>
+                </div>
+                <div className="text-center p-4 bg-slate-700/30 rounded-lg">
+                  <p className="text-slate-400 text-xs mb-1">Artist Ratio</p>
+                  <p className="text-purple-400 text-2xl font-bold">{stats.totalUsers > 0 ? Math.round((stats.totalArtists / stats.totalUsers) * 100) : 0}%</p>
+                </div>
               </div>
             </div>
           </>
