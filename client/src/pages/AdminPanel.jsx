@@ -125,10 +125,10 @@ const AdminPanel = () => {
             <p className="text-slate-400 text-sm mt-1">Welcome back, {user?.firstName}!</p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <button onClick={() => navigate('/panel/admin/approval')} className="px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-600 text-black font-bold rounded-lg">
+            <button onClick={() => navigate('/admin/approval')} className="px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-600 text-black font-bold rounded-lg">
               🎵 Song Approval {stats.pendingApprovals > 0 && `(${stats.pendingApprovals})`}
             </button>
-            <button onClick={() => navigate('/panel/admin/artists')} className="px-5 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg">
+            <button onClick={() => navigate('/admin/artists')} className="px-5 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg">
               🎤 Artists
             </button>
             <button onClick={() => { logout(); navigate('/') }} className="px-5 py-2 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold rounded-lg">
@@ -148,13 +148,13 @@ const AdminPanel = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
               <StatCard icon="👥" title="Total Users" value={stats.totalUsers} color="from-blue-600/20 to-blue-900/20" />
               <StatCard icon="🎵" title="Total Songs" value={stats.totalSongs} color="from-green-600/20 to-green-900/20" />
-              <StatCard icon="🎤" title="Total Artists" value={stats.totalArtists} color="from-purple-600/20 to-purple-900/20" onClick={() => navigate('/panel/admin/artists')} />
-              <StatCard icon="⏳" title="Pending Approval" value={stats.pendingApprovals} color="from-yellow-600/20 to-orange-900/20" onClick={() => navigate('/panel/admin/approval')} />
+              <StatCard icon="🎤" title="Total Artists" value={stats.totalArtists} color="from-purple-600/20 to-purple-900/20" onClick={() => navigate('/admin/artists')} />
+              <StatCard icon="⏳" title="Pending Approval" value={stats.pendingApprovals} color="from-yellow-600/20 to-orange-900/20" onClick={() => navigate('/admin/approval')} />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
               <StatCard icon="✅" title="Approved Songs" value={stats.approvedSongs} color="from-emerald-600/20 to-emerald-900/20" />
-              <StatCard icon="❌" title="Rejected Songs" value={stats.rejectedSongs} color="from-red-600/20 to-red-900/20" onClick={() => { navigate('/panel/admin/approval'); setTimeout(() => document.querySelector('button')?.click(), 100); }} />
+              <StatCard icon="❌" title="Rejected Songs" value={stats.rejectedSongs} color="from-red-600/20 to-red-900/20" onClick={() => { navigate('/admin/approval'); setTimeout(() => document.querySelector('button')?.click(), 100); }} />
               <StatCard icon="📊" title="Total Categories" value={stats.totalCategories} color="from-cyan-600/20 to-cyan-900/20" />
               <StatCard icon="🎧" title="Total Plays" value={stats.totalPlays} color="from-pink-600/20 to-pink-900/20" />
             </div>
@@ -193,10 +193,10 @@ const AdminPanel = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
-              <button onClick={() => navigate('/panel/admin/approval')} className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white font-bold py-3 rounded-lg transition-all">🎵 Review Pending Songs</button>
-              <button onClick={() => navigate('/panel/admin/artists')} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-3 rounded-lg transition-all">🎤 Manage Artists</button>
-              <button onClick={() => navigate('/panel/admin/approval')} className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-3 rounded-lg transition-all">📋 Approval History</button>
-              <button onClick={() => navigate('/panel/admin/artists')} className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold py-3 rounded-lg transition-all">📊 Artist Statistics</button>
+              <button onClick={() => navigate('/admin/approval')} className="bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-500 hover:to-orange-500 text-white font-bold py-3 rounded-lg transition-all">🎵 Review Pending Songs</button>
+              <button onClick={() => navigate('/admin/artists')} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-3 rounded-lg transition-all">🎤 Manage Artists</button>
+              <button onClick={() => navigate('/admin/approval')} className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white font-bold py-3 rounded-lg transition-all">📋 Approval History</button>
+              <button onClick={() => navigate('/admin/artists')} className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold py-3 rounded-lg transition-all">📊 Artist Statistics</button>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -228,7 +228,7 @@ const AdminPanel = () => {
                     <p className="text-slate-300 mb-4">
                       <span className="text-yellow-400 font-bold text-3xl">{stats.pendingApprovals}</span> songs waiting for review.
                     </p>
-                    <button onClick={() => navigate('/panel/admin/approval')} className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-yellow-500 hover:to-orange-500 transition-all">
+                    <button onClick={() => navigate('/admin/approval')} className="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-yellow-500 hover:to-orange-500 transition-all">
                       Start Reviewing →
                     </button>
                   </>

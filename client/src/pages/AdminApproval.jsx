@@ -127,7 +127,7 @@ const AdminApproval = () => {
             <h1 className="text-white text-3xl font-bold">🎵 Song Moderation</h1>
             <p className="text-slate-400 text-sm mt-1">Review, approve, and track approval history</p>
           </div>
-          <button onClick={() => navigate('/panel/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
+          <button onClick={() => navigate('/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
             ← Back to Dashboard
           </button>
         </div>

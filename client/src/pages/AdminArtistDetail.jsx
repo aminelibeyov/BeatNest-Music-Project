@@ -59,8 +59,8 @@ const AdminArtistDetail = () => {
             <p className="text-slate-400 text-sm mt-1">{artist?.email}</p>
           </div>
           <div className="flex gap-3">
-            <button onClick={() => navigate('/panel/admin/artists')} className="px-4 py-2 bg-slate-700 text-white rounded-lg text-sm">← Artists</button>
-            <button onClick={() => navigate('/panel/admin')} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">Dashboard</button>
+            <button onClick={() => navigate('/admin/artists')} className="px-4 py-2 bg-slate-700 text-white rounded-lg text-sm">← Artists</button>
+            <button onClick={() => navigate('/admin')} className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">Dashboard</button>
           </div>
         </div>
       </div>

@@ -62,7 +62,7 @@ const AdminArtists = () => {
             <h1 className="text-white text-3xl font-bold">🎤 Artist Management</h1>
             <p className="text-slate-400 text-sm mt-1">View, search, and manage platform artists</p>
           </div>
-          <button onClick={() => navigate('/panel/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
+          <button onClick={() => navigate('/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
             ← Back to Dashboard
           </button>
         </div>
@@ -163,7 +163,7 @@ const AdminArtists = () => {
 
                   <div className="flex gap-2">
                     <button
-                      onClick={() => navigate(`/panel/admin/artists/${artist._id}`)}
+                      onClick={() => navigate(`/admin/artists/${artist._id}`)}
                       className="flex-1 px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-lg hover:from-purple-500 hover:to-pink-500 text-sm"
                     >
                       View Profile & Stats
