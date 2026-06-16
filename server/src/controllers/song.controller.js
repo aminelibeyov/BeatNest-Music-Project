@@ -4,6 +4,23 @@ const ApiError = require('../utils/ApiError');
 
 const createSong = async (req, res, next) => {
   try {
+    const hasUpload = req.files && (
+      req.files.audioFile?.length ||
+      req.files.audio?.length ||
+      req.files.coverImage?.length ||
+      req.files.cover?.length
+    );
+
+    if (hasUpload || req.is('multipart/form-data')) {
+      const song = await musicService.createSongFromUpload(req.body, req.files, req.user.id);
+
+      return res.status(201).json({
+        success: true,
+        message: 'Song uploaded successfully and is pending admin approval',
+        data: song
+      });
+    }
+
     const { error, value } = createSongSchema.validate(req.body);
 
     if (error) {
@@ -16,6 +33,20 @@ const createSong = async (req, res, next) => {
       success: true,
       message: 'Song created successfully',
       data: song
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getArtistSongs = async (req, res, next) => {
+  try {
+    const result = await musicService.getArtistSongs(req.user.id, req.query);
+
+    res.status(200).json({
+      success: true,
+      message: 'Artist songs fetched successfully',
+      data: result
     });
   } catch (error) {
     next(error);
@@ -122,6 +153,7 @@ const incrementPlayCount = async (req, res, next) => {
 
 module.exports = {
   createSong,
+  getArtistSongs,
   getSongs,
   getSongById,
   updateSong,

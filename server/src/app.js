@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 require('express-async-errors');
 const passport = require('passport');
 const dns = require('dns');
@@ -40,6 +41,9 @@ app.use(limiter);
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Uploaded files
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Logger
 app.use(morganMiddleware);

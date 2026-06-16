@@ -31,8 +31,8 @@ const ArtistSongs = () => {
       setSongs(artistSongs)
 
       // Calculate stats
-      const approved = artistSongs.filter(s => s.status === 'approved').length
-      const pending = artistSongs.filter(s => s.status === 'pending').length
+      const approved = artistSongs.filter(s => s.approvalStatus?.status === 'approved' || s.status === 'approved').length
+      const pending = artistSongs.filter(s => s.approvalStatus?.status === 'pending' || s.status === 'pending').length
       const totalPlays = artistSongs.reduce((sum, s) => sum + (s.plays || 0), 0)
 
       setStats({

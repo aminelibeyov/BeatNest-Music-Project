@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import api from '../services/api'
 import { toast } from 'react-toastify'
 
@@ -36,11 +36,13 @@ const ShowMoreText = ({ text, limit = 150 }) => {
 
 const AdminApproval = () => {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const initialTab = searchParams.get('status') || 'pending'
   const [songs, setSongs] = useState([])
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
   const [rejectionReasons, setRejectionReasons] = useState({})
-  const [activeTab, setActiveTab] = useState('pending')
+  const [activeTab, setActiveTab] = useState(initialTab)
   const [search, setSearch] = useState('')
   const [searchInput, setSearchInput] = useState('')
   const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, pages: 1 })
@@ -74,6 +76,14 @@ const AdminApproval = () => {
       // silent
     }
   }
+
+  useEffect(() => {
+    const tab = searchParams.get('status')
+    if (tab && tab !== activeTab) {
+      setActiveTab(tab)
+      setPagination((prev) => ({ ...prev, page: 1 }))
+    }
+  }, [searchParams])
 
   useEffect(() => {
     fetchSongs()
@@ -127,7 +137,7 @@ const AdminApproval = () => {
             <h1 className="text-white text-3xl font-bold">🎵 Song Moderation</h1>
             <p className="text-slate-400 text-sm mt-1">Review, approve, and track approval history</p>
           </div>
-          <button onClick={() => navigate('/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
+          <button onClick={() => navigate('/panel/admin')} className="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500">
             ← Back to Dashboard
           </button>
         </div>

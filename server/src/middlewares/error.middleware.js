@@ -42,6 +42,15 @@ const errorHandler = (err, req, res, next) => {
     error = new ApiError(401, 'Token has expired');
   }
 
+  // Handle multer errors
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    error = new ApiError(400, 'File size too large. Maximum size is 50MB');
+  }
+
+  if (err.message === 'Invalid file type') {
+    error = new ApiError(400, 'Invalid file type. Please upload a valid audio or image file.');
+  }
+
   const statusCode = error.statusCode || 500;
   const message = error.message || 'Internal Server Error';
 

@@ -88,11 +88,7 @@ const SongUpload = () => {
         uploadFormData.append('coverImage', formData.coverImage)
       }
 
-      const response = await api.post('/songs', uploadFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+      const response = await api.post('/songs', uploadFormData)
 
       toast.success('Song uploaded successfully! Awaiting admin approval... 🎵')
       navigate('/artist/songs')
