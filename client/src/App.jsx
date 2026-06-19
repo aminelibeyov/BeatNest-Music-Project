@@ -86,15 +86,14 @@ function App() {
           <Route path="/library" element={<ProtectedRoute><Library /></ProtectedRoute>} />
           <Route path="/premium" element={<ProtectedRoute><Premium /></ProtectedRoute>} />
 
-          <Route path="/panel/admin" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
-          <Route path="/panel/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
-          <Route path="/panel/admin/artists" element={<ProtectedRoute requiredRole="admin"><AdminArtists /></ProtectedRoute>} />
-          <Route path="/panel/admin/artists/:artistId" element={<ProtectedRoute requiredRole="admin"><AdminArtistDetail /></ProtectedRoute>} />
-          <Route path="/admin" element={<Navigate to="/panel/admin" replace />} />
-          <Route path="/admin/panel" element={<Navigate to="/panel/admin" replace />} />
-          <Route path="/admin/approval" element={<Navigate to="/panel/admin/approval" replace />} />
-          <Route path="/admin/artists" element={<Navigate to="/panel/admin/artists" replace />} />
-          <Route path="/admin/artists/:artistId" element={<AdminArtistRedirect />} />
+          <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminPanel /></ProtectedRoute>} />
+          <Route path="/admin/approval" element={<ProtectedRoute requiredRole="admin"><AdminApproval /></ProtectedRoute>} />
+          <Route path="/admin/artists" element={<ProtectedRoute requiredRole="admin"><AdminArtists /></ProtectedRoute>} />
+          <Route path="/admin/artists/:artistId" element={<ProtectedRoute requiredRole="admin"><AdminArtistDetail /></ProtectedRoute>} />
+          <Route path="/panel/admin" element={<Navigate to="/admin" replace />} />
+          <Route path="/panel/admin/approval" element={<Navigate to="/admin/approval" replace />} />
+          <Route path="/panel/admin/artists" element={<Navigate to="/admin/artists" replace />} />
+          <Route path="/panel/admin/artists/:artistId" element={<AdminArtistRedirect />} />
 
           <Route path="/artist/upload" element={<ProtectedRoute requiredRole="artist"><SongUpload /></ProtectedRoute>} />
           <Route path="/artist/songs" element={<ProtectedRoute requiredRole="artist"><ArtistSongs /></ProtectedRoute>} />
