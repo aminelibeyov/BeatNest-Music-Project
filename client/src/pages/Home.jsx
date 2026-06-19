@@ -36,6 +36,7 @@ const Home = () => {
     {
       name: 'Eminem',
       initials: 'EM',
+      image: 'https://www.rollingstone.com/wp-content/uploads/2004/11/GettyImages-85623204v2.jpg?w=1581&h=1054&crop=1',
       genre: 'Hip-Hop/Rap',
       famousSong: 'Lose Yourself',
       bio: 'One of the best-selling music artists of all time and the most successful rapper ever',
@@ -45,6 +46,7 @@ const Home = () => {
     {
       name: 'The Weeknd',
       initials: 'TW',
+      image: 'https://people.com/thmb/5Ineswb_0M73p3F41bGgEI5bWOE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(767x453:769x455)/Abel-Tesfaye-The-Weeknd-hurry-up-tomorrow-051425-tout-85e96d2443a94312beed6480f6d1fa20.jpg',
       genre: 'R&B/Synthwave',
       famousSong: 'Blinding Lights',
       bio: 'Canadian singer-songwriter known for his distinctive falsetto and dark production',
@@ -54,6 +56,7 @@ const Home = () => {
     {
       name: 'Drake',
       initials: 'DR',
+      image: 'https://ichef.bbci.co.uk/ace/standard/976/cpsprodpb/18357/production/_121995199_gettyimages-1172292629.jpg',
       genre: 'Hip-Hop/R&B',
       famousSong: 'One Dance',
       bio: 'Canadian rapper, singer, and songwriter with the most certified records in history',
@@ -63,6 +66,7 @@ const Home = () => {
     {
       name: 'Billie Eilish',
       initials: 'BE',
+      image: 'https://static.wikia.nocookie.net/gracieabrams/images/3/39/Billie_Eilish.jpeg/revision/latest?cb=20250318232144',
       genre: 'Alternative/Pop',
       famousSong: 'Bad Guy',
       bio: 'Youngest artist to win Grammy Awards in the major categories at 18 years old',
@@ -192,17 +196,17 @@ const Home = () => {
               {famousArtists.map((artist, index) => (
                 <div 
                   key={index} 
-                  className="card bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-xl overflow-hidden hover:from-slate-700/80 hover:to-slate-800/80 transition duration-300 border border-slate-700/50 hover:border-green-500/50 transform hover:scale-105"
+                  className="card group bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-xl overflow-hidden hover:from-slate-700/80 hover:to-slate-800/80 transition duration-300 border border-slate-700/50 hover:border-green-500/50 transform hover:scale-105"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {/* Artist Avatar */}
-                  <div className={`bg-gradient-to-br ${artist.color} p-16 flex items-center justify-center relative overflow-hidden h-40`}>
-                    <div className="absolute inset-0 opacity-20 blur-3xl bg-white"></div>
-                    <div className="relative z-10">
-                      <div className="text-6xl font-bold text-white drop-shadow-lg animate-bounce-smooth">
-                        {artist.initials}
-                      </div>
-                    </div>
+                  <div className={`relative overflow-hidden h-48`}>
+                    <img 
+                      src={artist.image} 
+                      alt={artist.name} 
+                      className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
                   </div>
 
                   {/* Artist Info */}
